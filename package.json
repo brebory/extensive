@@ -24,10 +24,12 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "dirty-chai": "^1.2.2",
-    "lodash": "^4.13.1",
     "mocha": "^2.5.3",
     "rekuire": "^0.1.9",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1"
   }
 }
