@@ -1,0 +1,33 @@
+{
+  "name": "extensive",
+  "version": "0.0.1",
+  "description": "Tiny library for extending objects Backbone-style.",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brebory/extensive.git"
+  },
+  "keywords": [
+    "extend",
+    "classes",
+    "backbone"
+  ],
+  "author": "Brendon Roberto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brebory/extensive/issues"
+  },
+  "homepage": "https://github.com/brebory/extensive#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dirty-chai": "^1.2.2",
+    "lodash": "^4.13.1",
+    "mocha": "^2.5.3",
+    "rekuire": "^0.1.9",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
+  }
+}
