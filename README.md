@@ -1,4 +1,5 @@
 # extensive
+[![Build Status](https://-ci.org/brebory/extensive.svg?branch=master)](https://travis-ci.org/brebory/extensive)
 
 Tiny javascript library for extending objects Backbone-style.
 
