@@ -4,7 +4,8 @@
   "description": "Tiny library for extending objects Backbone-style.",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "node_modules/.bin/mocha --reporter spec",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,9 @@
   "homepage": "https://github.com/brebory/extensive#readme",
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
     "dirty-chai": "^1.2.2",
+    "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "rekuire": "^0.1.9",
     "sinon": "^1.17.4",
