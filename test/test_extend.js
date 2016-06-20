@@ -5,6 +5,7 @@ const chai      = require('chai'),
       sinon     = require('sinon'),
       sinonChai = require('sinon-chai'),
       _         = require('lodash'),
+      util      = require('util'),
       use       = require('rekuire'),
       expect    = chai.expect;
 
@@ -12,7 +13,7 @@ chai.use(dirtyChai);
 chai.use(sinonChai);
 
 const extend = use('index');
-const noop   = function() {};
+const noop   = function() { return function() {}; };
 
 describe('extensive', function() {
 
@@ -23,7 +24,7 @@ describe('extensive', function() {
     describe('~extend', function() {
 
         it('should return a constructor with a static extend method', function() {
-            const Class = extend(noop);
+            const Class = extend(noop());
 
             expect(Class).to.be.a('function');
             expect(Class).itself.to.respondTo('extend');
@@ -46,18 +47,18 @@ describe('extensive', function() {
             const instanceMethods = {};
 
             _.forEach(methodNames, function(value, index) {
-                instanceMethods[methodNames[index]] = sinon.stub().returns(returnValues[index]);
+                instanceMethods[value] = sinon.stub().returns(returnValues[index]);
             });
 
-            const Class = extend(noop, instanceMethods);
+            const Class = extend(noop(), instanceMethods);
 
             var instance = new Class();
 
-            _.forEach(instanceMethods, function(value, key) {
+            _.forOwn(instanceMethods, function(value, key) {
                 expect(instance).to.respondTo(key);
             });
 
-            _.forEach(methodNames, function(value, index) {
+            _.forOwn(methodNames, function(value, index) {
                 expect(instance[value]()).to.equal(returnValues[index]);
             });
 
@@ -72,7 +73,7 @@ describe('extensive', function() {
                 classMethods[methodNames[index]] = sinon.stub().returns(returnValues[index]);
             });
 
-            const Class = extend(noop, {}, classMethods);
+            const Class = extend(noop(), {}, classMethods);
 
             _.forEach(classMethods, function(value, key) {
                 expect(Class).itself.to.respondTo(key);
@@ -84,9 +85,9 @@ describe('extensive', function() {
         });
 
         it('should properly set up the prototype chain for multiple levels of subclassing', function() {
-            const baseCtor      = noop;
-            const subCtor       = noop;
-            const sub2Ctor      = noop;
+            const baseCtor      = noop();
+            const subCtor       = noop();
+            const sub2Ctor      = noop();
             const baseFn        = sinon.stub();
             const fooBaseRetVal = "test1";
             const fooBaseFn     = sinon.stub().returns(fooBaseRetVal);
@@ -102,6 +103,7 @@ describe('extensive', function() {
             const SubClass  = BaseClass.extend(subCtor, { sub: subFn, foo: fooSubFn });
             const SubClass2 = SubClass.extend(sub2Ctor, { sub2: sub2Fn, foo: fooSub2Fn }, { sub2Cls: sub2ClsFn });
 
+            expect(BaseClass).itself.to.respondTo("extend");
             expect(SubClass).itself.to.respondTo("extend");
             expect(SubClass2).itself.to.respondTo("extend");
 
@@ -131,6 +133,8 @@ describe('extensive', function() {
             expect(sub2).to.respondTo("sub");
             expect(sub2).to.respondTo("sub2");
             expect(sub2.foo()).to.equal(fooSub2RetVal);
+            expect(fooSub2Fn).to.have.been.called();
+
         });
 
     });
