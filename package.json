@@ -1,6 +1,6 @@
 {
   "name": "extensive",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Tiny library for extending objects Backbone-style.",
   "main": "./lib/index.js",
   "scripts": {
