@@ -51,7 +51,7 @@ const Cat = Animal.extend(function(name, owner) {
     }
 });
 
-var felix = new Pet("felix", "brebory");
+var felix = new Cat("felix", "brebory");
 
 felix.speak();
 // "meowww"
@@ -61,5 +61,8 @@ felix.showAffection("gina");
 
 felix.showAffection("brebory");
 // "purr"
+
+Cat.isAnimal(felix);
+// true
 
 ```
